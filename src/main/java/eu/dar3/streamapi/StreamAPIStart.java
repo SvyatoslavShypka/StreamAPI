@@ -1,2 +1,5 @@
-package main.java.eu.dar3.streamapi;public class StreamAPIStart {
+package eu.dar3.streamapi;
+
+public class StreamAPIStart {
+
 }
