@@ -76,6 +76,34 @@ public class OldWayUtil {
         return min;
     }
 
+    // Find specialist with min salary
+    public static Specialist findSpecialistWithMinSalary(List<Specialist> list) throws IndexOutOfBoundsException {
+        int min = list.get(0).getSalary();
+        Specialist result = list.get(0);
+        for (Specialist specialist: list
+        ) {
+            if (min > specialist.getSalary()) {
+                min = specialist.getSalary();
+                result = specialist;
+            }
+        }
+        return result;
+    }
+
+    // Find specialist with max salary
+    public static Specialist findSpecialistWithMaxSalary(List<Specialist> list) throws IndexOutOfBoundsException {
+        int max = list.get(0).getSalary();
+        Specialist result = list.get(0);
+        for (Specialist specialist: list
+        ) {
+            if (max < specialist.getSalary()) {
+                max = specialist.getSalary();
+                result = specialist;
+            }
+        }
+        return result;
+    }
+
     // Max salary
     public static int maxSalary(List<Specialist> list) throws IndexOutOfBoundsException {
         int max = list.get(0).getSalary();

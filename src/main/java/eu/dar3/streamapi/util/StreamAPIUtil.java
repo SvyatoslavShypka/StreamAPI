@@ -26,78 +26,67 @@ public class StreamAPIUtil {
 
     // Checking whether all fields match
     public static boolean allFieldsMatchSpecialty(List<Specialist> list, Specialty specialty) {
-        for (Specialist specialist: list
-        ) {
-            if (!specialist.getSpecialty().equals(specialty)) {
-                return false;
-            }
-        }
-        return true;
+        return list.stream()
+                .allMatch(specialist -> specialist.getSpecialty().equals(specialty));
     }
 
     // Check is there any Speciality
     public static boolean isThereAnySpecialty(List<Specialist> list, Specialty specialty) {
-        for (Specialist specialist: list
-        ) {
-            if (specialist.getSpecialty().equals(specialty)) {
-                return true;
-            }
-        }
-        return false;
+        return list.stream()
+                .anyMatch(specialist -> specialist.getSpecialty().equals(specialty));
     }
 
     // Sorting Ascending
     public static List<Specialist> sortAscending(List<Specialist> list) {
-        list.sort(Comparator.comparing(Specialist::getName));
-        return list;
+        return list.stream()
+                .sorted(Comparator.comparing(Specialist::getName))
+                .toList();
     }
 
     // Sorting Descending
     public static List<Specialist> sortDescending(List<Specialist> list) {
-        list.sort((u1, u2) -> u2.getName().compareTo(u1.getName()));
-        return list;
+        return list.stream()
+                .sorted(Comparator.comparing(Specialist::getName).reversed())
+                .toList();
     }
 
-    // Min salary
-    public static int minSalary(List<Specialist> list) throws IndexOutOfBoundsException {
-        int min = list.get(0).getSalary();
-        for (Specialist specialist: list
-        ) {
-            min = min > specialist.getSalary() ? specialist.getSalary() : min;
-        }
+    // Min salary level
+    public static int minSalary(List<Specialist> list) throws NullPointerException{
+        int min = list.stream()
+                .min(Comparator.comparing(Specialist::getSalary)).orElse(null).getSalary();
         return min;
     }
 
-    // Max salary
-    public static int maxSalary(List<Specialist> list) throws IndexOutOfBoundsException {
-        int max = list.get(0).getSalary();
-        for (Specialist specialist: list
-        ) {
-            max = max < specialist.getSalary() ? specialist.getSalary() : max;
-        }
+    // Max salary level
+    public static int maxSalary(List<Specialist> list) throws NullPointerException{
+        int max = list.stream()
+                .max(Comparator.comparing(Specialist::getSalary)).orElse(null).getSalary();
         return max;
     }
 
+    // Find specialist with min salary
+    public static Specialist findSpecialistWithMinSalary(List<Specialist> list) {
+        return list.stream()
+                .min(Comparator.comparing(Specialist::getSalary)).orElse(null);
+    }
+
+    // Find specialist with max salary
+    public static Specialist findSpecialistWithMaxSalary(List<Specialist> list) {
+        return list.stream()
+                .max(Comparator.comparing(Specialist::getSalary)).orElse(null);
+    }
+
+
     // Check whether all have salary more than
-    public static boolean areAllHaveSalaryMoreThan(List<Specialist> list, int salary) throws IndexOutOfBoundsException {
-        for (Specialist specialist: list
-        ) {
-            if (specialist.getSalary() <= salary) {
-                return false;
-            }
-        }
-        return true;
+    public static boolean areAllHaveSalaryMoreThan(List<Specialist> list, int salary) {
+        return list.stream()
+                .allMatch(specialist -> specialist.getSalary() > salary);
     }
 
     // No one with salary more than
     public static boolean isNoOneWithSalaryMoreThan(List<Specialist> list, int salary) throws IndexOutOfBoundsException {
-        for (Specialist specialist: list
-        ) {
-            if (specialist.getSalary() > salary) {
-                return false;
-            }
-        }
-        return true;
+        return !list.stream()
+                .anyMatch(specialist -> specialist.getSalary() > salary);
     }
 
 
