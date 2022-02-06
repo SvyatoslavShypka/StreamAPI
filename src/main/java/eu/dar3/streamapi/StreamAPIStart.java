@@ -3,6 +3,7 @@ package eu.dar3.streamapi;
 import eu.dar3.streamapi.model.Specialist;
 import eu.dar3.streamapi.model.Specialty;
 import eu.dar3.streamapi.util.OldWayUtil;
+import eu.dar3.streamapi.util.StreamAPIUtil;
 
 import java.util.List;
 
@@ -13,6 +14,9 @@ public class StreamAPIStart {
         System.out.println("Old: Get whole list");
         OldWayUtil.printSpecialists(specialistsOld);
 
+        List<Specialist> specialistsStream = StreamAPIUtil.getSpecialists();
+        System.out.println("Stream: Get whole list");
+        StreamAPIUtil.printSpecialists(specialistsStream);
 
         // Filter by specialties
         for (Specialty specialty: Specialty.values()

@@ -5,37 +5,29 @@ import eu.dar3.streamapi.model.Specialty;
 
 import java.util.*;
 
-public class OldWayUtil {
-
+public class StreamAPIUtil {
     // Get initial specialist list
     public static List<Specialist> getSpecialists() {
-        List<Specialist> list = new ArrayList<>();
-        list.add(new Specialist("Petro Petrenko", 8000, Specialty.DEVOPS));
-        list.add(new Specialist("Igor Igorenko", 80000, Specialty.DIRECTOR));
-        list.add(new Specialist("Taras Tarasenko", 15000, Specialty.ENGINEER));
-        list.add(new Specialist("Ivan Ivanenko", 10000, Specialty.ENGINEER));
-        list.add(new Specialist("Vasyl Vasylenko", 10000, Specialty.DEVOPS));
-        list.add(new Specialist("Stepan Stepanenko", 9000, Specialty.DEVOPS));
-
-        return list;
+        return List.of(
+                new Specialist("Petro Petrenko", 8000, Specialty.DEVOPS),
+                new Specialist("Igor Igorenko", 80000, Specialty.DIRECTOR),
+                new Specialist("Taras Tarasenko", 15000, Specialty.ENGINEER),
+                new Specialist("Ivan Ivanenko", 10000, Specialty.ENGINEER),
+                new Specialist("Vasyl Vasylenko", 10000, Specialty.DEVOPS),
+                new Specialist("Stepan Stepanenko", 9000, Specialty.DEVOPS));
     }
 
     // Filter by speciality
     public static List<Specialist> filterBySpecialty(List<Specialist> list, Specialty specialty) {
-        List<Specialist> result = new ArrayList<>();
-        for (Specialist specialist: list
-             ) {
-            if (specialist.getSpecialty().equals(specialty)) {
-                result.add(specialist);
-            }
-        }
-        return result;
+        return list.stream()
+                .filter(specialist -> specialist.getSpecialty().equals(specialty))
+                .toList();
     }
 
     // Checking whether all fields match
     public static boolean allFieldsMatchSpecialty(List<Specialist> list, Specialty specialty) {
         for (Specialist specialist: list
-             ) {
+        ) {
             if (!specialist.getSpecialty().equals(specialty)) {
                 return false;
             }
@@ -46,7 +38,7 @@ public class OldWayUtil {
     // Check is there any Speciality
     public static boolean isThereAnySpecialty(List<Specialist> list, Specialty specialty) {
         for (Specialist specialist: list
-             ) {
+        ) {
             if (specialist.getSpecialty().equals(specialty)) {
                 return true;
             }
@@ -70,7 +62,7 @@ public class OldWayUtil {
     public static int minSalary(List<Specialist> list) throws IndexOutOfBoundsException {
         int min = list.get(0).getSalary();
         for (Specialist specialist: list
-             ) {
+        ) {
             min = min > specialist.getSalary() ? specialist.getSalary() : min;
         }
         return min;
@@ -80,7 +72,7 @@ public class OldWayUtil {
     public static int maxSalary(List<Specialist> list) throws IndexOutOfBoundsException {
         int max = list.get(0).getSalary();
         for (Specialist specialist: list
-             ) {
+        ) {
             max = max < specialist.getSalary() ? specialist.getSalary() : max;
         }
         return max;
@@ -89,7 +81,7 @@ public class OldWayUtil {
     // Check whether all have salary more than
     public static boolean areAllHaveSalaryMoreThan(List<Specialist> list, int salary) throws IndexOutOfBoundsException {
         for (Specialist specialist: list
-             ) {
+        ) {
             if (specialist.getSalary() <= salary) {
                 return false;
             }
@@ -100,7 +92,7 @@ public class OldWayUtil {
     // No one with salary more than
     public static boolean isNoOneWithSalaryMoreThan(List<Specialist> list, int salary) throws IndexOutOfBoundsException {
         for (Specialist specialist: list
-             ) {
+        ) {
             if (specialist.getSalary() > salary) {
                 return false;
             }
@@ -119,10 +111,11 @@ public class OldWayUtil {
     public static Map<Specialty, List<Specialist>> gropingBySpecialty(List<Specialist> list){
         Map<Specialty, List<Specialist>> result = new HashMap<>();
         for (Specialist x: list
-             ) {
+        ) {
             result.putIfAbsent(x.getSpecialty(), filterBySpecialty(list, x.getSpecialty()));
         }
         return result;
     }
+
 
 }
