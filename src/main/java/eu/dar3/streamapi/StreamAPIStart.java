@@ -11,7 +11,7 @@ public class StreamAPIStart {
 
         List<Specialist> specialistsOld = OldWayUtil.getSpecialists();
         System.out.println("Old: Get whole list");
-        System.out.println(specialistsOld);
+        OldWayUtil.printSpecialists(specialistsOld);
 
 
         // Filter by specialties
@@ -19,42 +19,66 @@ public class StreamAPIStart {
              ) {
         List<Specialist> filteredListBySpecialty = OldWayUtil.filterBySpecialty(specialistsOld, specialty);
         System.out.println("Old: Filter by specialties - " + specialty + ":");
-        System.out.println(filteredListBySpecialty);
+            OldWayUtil.printSpecialists(filteredListBySpecialty);
         }
 
         // Checking whether all fields match
         for (Specialty specialty: Specialty.values()
              ) {
         boolean allFieldsMatch = OldWayUtil.allFieldsMatchSpecialty(specialistsOld, specialty);
-        System.out.println("Old: All fields match to " + specialty + "?");
-        System.out.println(allFieldsMatch);
+        System.out.println("Old: All fields match to " + specialty + "? " + allFieldsMatch);
         }
 
         // Check is there any Speciality
         for (Specialty specialty: Specialty.values()
              ) {
         boolean isAny = OldWayUtil.isThereAnySpecialty(specialistsOld, specialty);
-        System.out.println("Old: Is there any " + specialty + "?");
-        System.out.println(isAny);
+        System.out.println("Old: Is there any " + specialty + "? " + isAny);
         }
 
 
-
         // Sorting
+        System.out.println("Ascending");
+        OldWayUtil.printSpecialists(OldWayUtil.sortAscending(specialistsOld));
+
+        System.out.println("Descending");
+        OldWayUtil.printSpecialists(OldWayUtil.sortDescending(specialistsOld));
+
 
 
         // Max salary
+//        List<Specialist> emptyList = OldWayUtil.filterBySpecialty(specialistsOld, Specialty.MANAGER);
+        try {
+            System.out.println("Min salary: " + OldWayUtil.minSalary(specialistsOld));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is empty list");
+        }
 
 
         // Min salary
+        try {
+            System.out.println("Max salary: " + OldWayUtil.maxSalary(specialistsOld));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is empty list");
+        }
 
+        // Check whether all have salary more than
+        int salaryLimit = 10000;
+        try {
+            System.out.println("Are all have salary more than " + salaryLimit + "? " + OldWayUtil.areAllHaveSalaryMoreThan(specialistsOld, salaryLimit));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is empty list");
+        }
+
+        // No one with salary more than
+        int maxSalaryLimit = 90000;
+        try {
+            System.out.println("Is no one with salary more than " + maxSalaryLimit + "? " + OldWayUtil.isNoOneWithSalaryMoreThan(specialistsOld, maxSalaryLimit));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is empty list");
+        }
 
         // Grouping
-
-
-
-
-        // No one with salary more then
 
 
     }
