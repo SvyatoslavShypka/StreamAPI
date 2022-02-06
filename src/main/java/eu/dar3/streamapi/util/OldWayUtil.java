@@ -56,23 +56,13 @@ public class OldWayUtil {
 
     // Sorting Ascending
     public static List<Specialist> sortAscending(List<Specialist> list) {
-        Collections.sort(list, new Comparator<Specialist>() {
-            @Override
-            public int compare(Specialist u1, Specialist u2) {
-                return u1.getName().compareTo(u2.getName());
-            }
-        });
+        list.sort(Comparator.comparing(Specialist::getName));
         return list;
     }
 
     // Sorting Descending
     public static List<Specialist> sortDescending(List<Specialist> list) {
-        Collections.sort(list, new Comparator<Specialist>() {
-            @Override
-            public int compare(Specialist u1, Specialist u2) {
-                return u2.getName().compareTo(u1.getName());
-            }
-        });
+        list.sort((u1, u2) -> u2.getName().compareTo(u1.getName()));
         return list;
     }
 
