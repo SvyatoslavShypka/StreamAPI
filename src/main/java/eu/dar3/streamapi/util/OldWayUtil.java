@@ -34,10 +34,27 @@ public class OldWayUtil {
     }
 
 
-    // Checking for matches
+    // Checking whether all fields match
+    public static boolean allFieldsMatchSpecialty(List<Specialist> list, Specialty specialty) {
+        for (Specialist specialist: list
+             ) {
+            if (!specialist.getSpecialty().equals(specialty)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-
-    // Check whether there is any Speciality
+    // Check is there any Speciality
+    public static boolean isThereAnySpecialty(List<Specialist> list, Specialty specialty) {
+        for (Specialist specialist: list
+             ) {
+            if (specialist.getSpecialty().equals(specialty)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     // Check whether all have salary more than
