@@ -3,10 +3,7 @@ package eu.dar3.streamapi.util;
 import eu.dar3.streamapi.model.Specialist;
 import eu.dar3.streamapi.model.Specialty;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class OldWayUtil {
 
@@ -129,6 +126,14 @@ public class OldWayUtil {
 
 
     // Group specialists by specialty
+    public static Map<Specialty, List<Specialist>> gropingBySpecialty(List<Specialist> list){
+        Map<Specialty, List<Specialist>> result = new HashMap<>();
+        for (Specialist x: list
+             ) {
+            result.putIfAbsent(x.getSpecialty(), filterBySpecialty(list, x.getSpecialty()));
+        }
+        return result;
+    }
 
 
 }

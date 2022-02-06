@@ -79,7 +79,7 @@ public class StreamAPIStart {
         }
 
         // Grouping
-
+        System.out.println(OldWayUtil.gropingBySpecialty(specialistsOld));
 
     }
 }
